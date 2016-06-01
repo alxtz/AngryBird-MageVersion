@@ -10,6 +10,7 @@ Ground::Ground(b2World *inputWorld)
     bodyStruct->type = b2_staticBody;
     bodyStruct->position.Set( PixToMeter_x(x()) , PixToMeter_y(y()) );
     bodyStruct->angle = 0;
+    objectType = "Ground";
 
     //設定定製器
 
@@ -29,5 +30,6 @@ Ground::Ground(b2World *inputWorld)
     bodyFixture->restitution = 0 ;
 
     physicBody = inWorld->CreateBody(bodyStruct);
+    physicBody->SetUserData (&objectType);
     physicBody->CreateFixture(bodyFixture);
 }

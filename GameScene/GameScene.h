@@ -9,6 +9,7 @@
 #include "./AbsClasses/AbsBird.h"
 #include "Singleshot.h"
 #include "GameEngine.h"
+#include "CollisionListener.h"
 
 class GameScene : public QGraphicsScene
 {
@@ -31,6 +32,10 @@ class GameScene : public QGraphicsScene
         QTimer * timer60;
 
         AbsBird * focusedBird;
+
+        CollisionListener * collisionListener;
+
+        //設定一個vector，貯存在physicWorld裡面的所有物體
 };
 
 

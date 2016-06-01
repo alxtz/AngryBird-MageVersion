@@ -18,7 +18,7 @@ Singleshot::Singleshot()
     singleshotPic = new QGraphicsPixmapItem(this);
     singleshotPic->setPixmap(QPixmap("./GameData/DefaultResources/Images/singleshot.png"));
 
-    setPos(200 , 410);
+    setPos(100 , 410);
     setZValue (0);
 
     //設定橡皮筋1 , 2的轉動點
@@ -35,7 +35,7 @@ Singleshot::Singleshot()
         rubberBand1 = new QGraphicsRectItem(this);
         rubberBand1->setTransformOriginPoint (rubberBand1OriginX , rubberBand1OriginY);
 
-        rubberBand1->setRect (0 , 0 , 80 , 8);
+        rubberBand1->setRect (0 , 0 , 0 , 0);
         rubberBand1->setBrush(QColor(51 , 17 , 0));
         rubberBand1->setPen(*pen);
         rubberBand1->setPos(2 , 14);
@@ -46,7 +46,7 @@ Singleshot::Singleshot()
         rubberBand2 = new QGraphicsRectItem(this);
         rubberBand2->setTransformOriginPoint (rubberBand2OriginX , rubberBand2OriginY);
 
-        rubberBand2->setRect (0 , 0 , 80 , 7);
+        rubberBand2->setRect (0 , 0 , 0 , 0);
         rubberBand2->setBrush(QColor(51 , 17 , 0));
         rubberBand2->setPen(*pen);
         rubberBand2->setPos(24 , 15);

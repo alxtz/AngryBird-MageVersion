@@ -12,9 +12,6 @@ void GameItem::updatePos()
     pos = physicBody->GetPosition();
     setPos(MeterToPix_x(pos.x) , MeterToPix_y(pos.y));
 
-    //b2Vec2 vel;
-    //vel = physicBody->GetLinearVelocity();
-
     float angle;
     angle = physicBody->GetAngle();
     setRotation(RadToDeg(angle));
@@ -48,4 +45,9 @@ float GameItem::RadToDeg(float Rad)
 float GameItem::DegToRad(float Deg)
 {
     return 3.1415926 / 180 * Deg;
+}
+
+void GameItem::addPhysics()
+{
+    
 }

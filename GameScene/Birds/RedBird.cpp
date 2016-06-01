@@ -3,10 +3,14 @@
 RedBird::RedBird(b2World * inputWorld)
 {
     //基本設定
-    setPos(0 , 300);
+    setPos(100 , 400);
     inWorld = inputWorld;
     setPixmap(QPixmap("./GameData/DefaultResources/Images/BirdImages/redBird.png"));
     setTransformOriginPoint(0 , 0);
+    //ObjectType = new string("Bird");
+    objectType = "Bird";
+
+    //設定鳥的physicBody
 
     //設定鳥的物體結構
     bodyStruct->type = b2_dynamicBody;
@@ -17,7 +21,7 @@ RedBird::RedBird(b2World * inputWorld)
 
         //設定一種形狀
         b2CircleShape * circleShape = new b2CircleShape();
-        circleShape->m_p.Set(15 , -15);
+        circleShape->m_p.Set(15 , -14);
         circleShape->m_radius = 15 ;
 
     bodyFixture->shape = circleShape ;
@@ -25,19 +29,7 @@ RedBird::RedBird(b2World * inputWorld)
     bodyFixture->friction = 1.0f ;
     bodyFixture->restitution = 0.75f;
 
-    /*
     //把物體跟定製器加進inWorld裡做運算
-    physicBody = inWorld->CreateBody(bodyStruct);
-    physicBody->CreateFixture(bodyFixture);
-
-    //設定鳥受重力的幅度
-    physicBody->SetGravityScale(1);
-
-    //設定速度，測試用
-    //physicBody->SetLinearVelocity(b2Vec2(300 , 100));
-
-    //設定角速度遞減跟線速度遞減
-    physicBody->SetAngularDamping(0.3);
-    physicBody->SetLinearDamping(0.07);
-    */
+    //physicBody = inWorld->CreateBody(bodyStruct);
+    //physicBody->SetUserData ( ObjectType );
 }

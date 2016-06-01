@@ -10,7 +10,7 @@ class Stick : public GameItem
     Q_OBJECT
 
     public:
-        Stick(b2World * inputWorld);
+        Stick(b2World * inputWorld , int inputX , int inputY);
 
     public slots:
         void updatePos ();

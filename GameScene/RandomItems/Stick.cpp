@@ -1,12 +1,16 @@
+#include <iostream>
 #include "Stick.h"
 
-Stick::Stick(b2World * inputWorld)
+using namespace std;
+
+Stick::Stick(b2World * inputWorld , int inputX , int inputY)
 {
     //基本設定
     setPixmap(QPixmap("./GameData/DefaultResources/Images/stick.png"));
     inWorld = inputWorld;
-    setPos(800 , 0);
+    setPos(inputX , inputY);
     setTransformOriginPoint(0 , 0);
+    objectType = "Stick";
 
     //設定鳥的物體結構
     bodyStruct->type = b2_dynamicBody;
@@ -18,9 +22,9 @@ Stick::Stick(b2World * inputWorld)
         //設定一種形狀(20x203)
         b2Vec2 vertices[4];
         vertices[0].Set(0 , 0);
-        vertices[1].Set(0 , -203 );
-        vertices[2].Set(20 , -203 );
-        vertices[3].Set(20 , 0);
+        vertices[1].Set(0 , -50 );
+        vertices[2].Set(5 , -50 );
+        vertices[3].Set(5 , 0);
 
         b2PolygonShape * polygonShape = new b2PolygonShape();
         polygonShape->Set (vertices , 4);
@@ -32,6 +36,7 @@ Stick::Stick(b2World * inputWorld)
 
     //丟進世界裡
     physicBody = inWorld->CreateBody(bodyStruct);
+    physicBody->SetUserData (&objectType);
     physicBody->CreateFixture(bodyFixture);
 
 }

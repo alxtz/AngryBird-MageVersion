@@ -2,11 +2,14 @@
 #define ABSBIRD_H
 
 
+#include <cstring>
 #include <Box2D/Box2D.h>
 #include <QObject>
 #include <QPixmap>
 #include <QGraphicsPixmapItem>
 #include "GameItem.h"
+
+using namespace std;
 
 class AbsBird : public GameItem
 {

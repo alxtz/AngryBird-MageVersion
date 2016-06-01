@@ -2,14 +2,21 @@
 #define GAMEITEM_H
 
 
+#include <cstring>
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <Box2D/Box2D.h>
 
+using namespace std;
+
 class GameItem : public QObject , public QGraphicsPixmapItem
 {
+    Q_OBJECT
+
     public:
         GameItem();
+
+        string objectType;
 
     public slots:
         virtual void updatePos();
@@ -29,6 +36,8 @@ class GameItem : public QObject , public QGraphicsPixmapItem
 
         float RadToDeg(float Rad);
         float DegToRad(float Deg);
+        
+        void addPhysics();
 };
 
 #endif // GAMEITEM_H

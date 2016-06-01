@@ -1,4 +1,7 @@
+#include <iostream>
 #include "AbsBird.h"
+
+using namespace std;
 
 AbsBird::AbsBird()
 {
@@ -30,6 +33,7 @@ void AbsBird::releaseBird(int forceX , int forceY)
 
     //把物體跟定製器加進inWorld裡做運算
     physicBody = inWorld->CreateBody(bodyStruct);
+    physicBody->SetUserData (&objectType);
     physicBody->CreateFixture(bodyFixture);
 
     //設定鳥受重力的幅度
@@ -41,4 +45,8 @@ void AbsBird::releaseBird(int forceX , int forceY)
     //設定角速度遞減跟線速度遞減
     physicBody->SetAngularDamping(0.3);
     physicBody->SetLinearDamping(0.07);
+
+    string * objectName = (string*)physicBody->GetUserData ();
+
+    cout<<"物體的名字為"<<*objectName<<endl;
 }
