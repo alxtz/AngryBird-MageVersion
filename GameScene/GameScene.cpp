@@ -9,6 +9,7 @@
 #include "./RandomItems/Stick_Vtl.h"
 #include "./RandomItems/Stick_Hrz.h"
 #include "./RandomItems/Stick2_Hrz.h"
+#include "./RandomItems/Stick2_Vtl.h"
 #include "./RandomItems/Block_Vtl.h"
 #include "./Pigs/Pig1.h"
 #include "./AbsClasses/GameItem.h"
@@ -137,6 +138,14 @@ void GameScene::setupStage()
                     GameItem * stick2_hrz = new Stick2_Hrz(physicWorld, x , y);
                     addItem(stick2_hrz);
                     connect(timer60 , SIGNAL(timeout()) , stick2_hrz , SLOT(updatePos()));
+                    break;
+                }
+                case 4:
+                {
+                    //4代表產生一隻垂直的長stick
+                    GameItem * stick2_vtl = new Stick2_Vtl(physicWorld, x , y);
+                    addItem(stick2_vtl);
+                    connect(timer60 , SIGNAL(timeout()) , stick2_vtl , SLOT(updatePos()));
                     break;
                 }
                 case 10:
