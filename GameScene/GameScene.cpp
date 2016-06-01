@@ -7,6 +7,7 @@
 #include "./Birds/RedBird.h"
 #include "./Birds/YellowBird.h"
 #include "./Birds/BigBird.h"
+#include "./Birds/BlueBird.h"
 #include "./RandomItems/Ground.h"
 #include "./RandomItems/Stick_Vtl.h"
 #include "./RandomItems/Stick_Hrz.h"
@@ -31,7 +32,7 @@ GameScene::GameScene()
     //設定timer60
     timer60 = new QTimer();
     timer60->setTimerType(Qt::PreciseTimer);
-    timer60->start(5); //1/60秒
+    timer60->start(1); //1/60秒
 
     //設定物理世界的更新頻率
     connect(timer60 , SIGNAL(timeout()) , this , SLOT(updateWorld()));
@@ -53,12 +54,13 @@ GameScene::GameScene()
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , singleshot , SLOT(pull(int , int)) );
     connect (gameEngine , SIGNAL(release())  , singleshot , SLOT(release()) );
     connect (gameEngine , SIGNAL(release())  , this , SLOT(releaseBird()) );
+    connect (gameEngine , SIGNAL(useSpecialAbility()) , this , SLOT(useSpecialAbility()));
 
     //新增一個碰撞感測器
     collisionListener = new CollisionListener();
 
     //設定一個向量，在物理世界裡會使用的重力
-    int gravityFactor = 10;
+    int gravityFactor = 100;
     gravity = new b2Vec2( 0.0f , -9.8f * gravityFactor );
 
     //設定物理世界，使用自定義的重力，與碰撞感測器
@@ -70,6 +72,7 @@ GameScene::GameScene()
     focusedBird = redBird;
     addItem(redBird);
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , redBird , SLOT(setPullPos(int , int)) );
+    flyingBird = redBird;
 
 
     //新增一個地板
@@ -172,7 +175,7 @@ void GameScene::setupStage()
 
 void GameScene::updateWorld()
 {
-    physicWorld->Step(0.005f , 10 , 10);
+    physicWorld->Step(0.001f , 10 , 10);
 }
 
 void GameScene::releaseBird()
@@ -184,20 +187,58 @@ void GameScene::releaseBird()
 void GameScene::setNewBird()
 {
     disconnect(gameEngine , SIGNAL(getPullPos(int , int)) , focusedBird , SLOT(setPullPos(int , int)) );
+    flyingBird = focusedBird;
+    //把正在飛的鳥設為上一隻射出的鳥
     /*
     AbsBird * redBird = new RedBird(physicWorld);
     focusedBird = redBird;
     addItem(redBird);
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , redBird , SLOT(setPullPos(int , int)) );
     */
+
     /*
     AbsBird * yellowBird = new YellowBird(physicWorld);
     focusedBird = yellowBird;
     addItem(yellowBird);
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , yellowBird , SLOT(setPullPos(int , int)) );
     */
+
+    /*
     AbsBird * bigBird = new BigBird(physicWorld);
     focusedBird = bigBird;
     addItem(bigBird);
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , bigBird , SLOT(setPullPos(int , int)) );
+    */
+
+    AbsBird * blueBird = new BlueBird(physicWorld);
+    focusedBird = blueBird;
+    addItem(blueBird);
+    connect(gameEngine , SIGNAL(getPullPos(int , int)) , blueBird , SLOT(setPullPos(int , int)) );
+    connect(blueBird , SIGNAL(spawnBlueChild(int , int)) , this , SLOT(spawnBlueChild(int,int)) );
+}
+
+void GameScene::useSpecialAbility()
+{
+    flyingBird->specialAbility ();
+}
+
+void GameScene::spawnBlueChild(int x, int y)
+{
+
+    AbsBird * child1 = new BlueBird(physicWorld , x , y);
+    child1->bodyStruct->position.Set(x , y);
+    child1->physicBody = child1->inWorld->CreateBody(child1->bodyStruct);
+    child1->physicBody->SetUserData (child1->itemData);
+    child1->physicBody->CreateFixture(child1->bodyFixture);
+    child1->physicBody->SetAngularDamping(0.3);
+    child1->physicBody->SetLinearDamping(0.07);
+    addItem(child1);
+    connect(timer60 , SIGNAL(timeout()) , child1 , SLOT(updatePos()));
+
+    /*
+    AbsBird * child2 = new BlueBird(physicWorld);
+    child2->physicBody->SetTransform (b2Vec2(x , y) , 0);
+    addItem(child2);
+    connect(timer60 , SIGNAL(timeout()) , child2 , SLOT(updatePos()));
+    */
 }

@@ -25,6 +25,7 @@ class GameEngine : public QObject , public QGraphicsPixmapItem
     signals:
         void getPullPos(int x , int y);
         void release();
+        void useSpecialAbility();
 
     private:
         bool leftButtonPressed;

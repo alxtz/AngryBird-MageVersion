@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_GameEngine_t {
-    QByteArrayData data[6];
-    char stringdata0[35];
+    QByteArrayData data[7];
+    char stringdata0[53];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,10 +34,12 @@ QT_MOC_LITERAL(1, 11, 10), // "getPullPos"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 1), // "x"
 QT_MOC_LITERAL(4, 25, 1), // "y"
-QT_MOC_LITERAL(5, 27, 7) // "release"
+QT_MOC_LITERAL(5, 27, 7), // "release"
+QT_MOC_LITERAL(6, 35, 17) // "useSpecialAbility"
 
     },
-    "GameEngine\0getPullPos\0\0x\0y\0release"
+    "GameEngine\0getPullPos\0\0x\0y\0release\0"
+    "useSpecialAbility"
 };
 #undef QT_MOC_LITERAL
 
@@ -47,19 +49,21 @@ static const uint qt_meta_data_GameEngine[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   24,    2, 0x06 /* Public */,
-       5,    0,   29,    2, 0x06 /* Public */,
+       1,    2,   29,    2, 0x06 /* Public */,
+       5,    0,   34,    2, 0x06 /* Public */,
+       6,    0,   35,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -73,6 +77,7 @@ void GameEngine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->getPullPos((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 1: _t->release(); break;
+        case 2: _t->useSpecialAbility(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -89,6 +94,13 @@ void GameEngine::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
             typedef void (GameEngine::*_t)();
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GameEngine::release)) {
                 *result = 1;
+                return;
+            }
+        }
+        {
+            typedef void (GameEngine::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&GameEngine::useSpecialAbility)) {
+                *result = 2;
                 return;
             }
         }
@@ -122,13 +134,13 @@ int GameEngine::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }
@@ -144,5 +156,11 @@ void GameEngine::getPullPos(int _t1, int _t2)
 void GameEngine::release()
 {
     QMetaObject::activate(this, &staticMetaObject, 1, Q_NULLPTR);
+}
+
+// SIGNAL 2
+void GameEngine::useSpecialAbility()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, Q_NULLPTR);
 }
 QT_END_MOC_NAMESPACE

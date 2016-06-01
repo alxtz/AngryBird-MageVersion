@@ -27,6 +27,11 @@ void AbsBird::updatePos()
     setRotation(-RadToDeg(angle));
 }
 
+void AbsBird::specialAbility()
+{
+
+}
+
 void AbsBird::releaseBird(int forceX , int forceY)
 {
     bodyStruct->position.Set( PixToMeter_x(x()) , PixToMeter_y(y()) );
@@ -40,7 +45,7 @@ void AbsBird::releaseBird(int forceX , int forceY)
     physicBody->SetGravityScale(1);
 
     //設定速度，測試用
-    physicBody->SetLinearVelocity(b2Vec2(forceX*3 , forceY*3));
+    physicBody->SetLinearVelocity(b2Vec2(forceX*7 , forceY*7));
 
     //設定角速度遞減跟線速度遞減
     physicBody->SetAngularDamping(0.3);

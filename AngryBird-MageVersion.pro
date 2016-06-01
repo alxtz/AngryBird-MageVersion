@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     GameScene/RandomItems/Stick2_Vtl.cpp \
     GameScene/AbsClasses/ItemData.cpp \
     GameScene/Birds/YellowBird.cpp \
-    GameScene/Birds/BigBird.cpp
+    GameScene/Birds/BigBird.cpp \
+    GameScene/Birds/BlueBird.cpp
 
 HEADERS  += MainWindow.h \
     GameView.h \
@@ -51,7 +52,8 @@ HEADERS  += MainWindow.h \
     GameScene/RandomItems/Stick2_Vtl.h \
     GameScene/AbsClasses/ItemData.h \
     GameScene/Birds/YellowBird.h \
-    GameScene/Birds/BigBird.h
+    GameScene/Birds/BigBird.h \
+    GameScene/Birds/BlueBird.h
 
 INCLUDEPATH += /usr/local/lib
 LIBS += -L /usr/local/lib/

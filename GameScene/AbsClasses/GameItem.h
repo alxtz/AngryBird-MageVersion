@@ -19,16 +19,15 @@ class GameItem : public QObject , public QGraphicsPixmapItem
 
         string objectType;
         ItemData * itemData;
+        b2Body * physicBody;
+        b2World * inWorld;
+        b2BodyDef * bodyStruct;
+        b2FixtureDef * bodyFixture;
 
     public slots:
         virtual void updatePos();
 
     protected:
-        b2Body * physicBody;
-        b2BodyDef * bodyStruct;
-        b2FixtureDef * bodyFixture;
-
-        b2World * inWorld;
 
         float PixToMeter_x(float Pix);
         float MeterToPix_x(float Meter);

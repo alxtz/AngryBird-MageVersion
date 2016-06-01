@@ -20,6 +20,10 @@ void GameEngine::keyPressEvent(QKeyEvent *event)
     {
         qDebug()<<"you press Q !";
     }
+    else if(event->key()==Qt::Key_Space)
+    {
+        emit useSpecialAbility ();
+    }
 }
 
 void GameEngine::keyReleaseEvent(QKeyEvent *event)

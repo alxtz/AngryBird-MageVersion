@@ -58,5 +58,12 @@ void YellowBird::updatePos()
 
 void YellowBird::specialAbility()
 {
+    b2Vec2 vel;
+    vel = physicBody->GetLinearVelocity();
+    int vX , vY;
+    vX = vel.x*10;
+    vY = vel.y*10;
+    vel.Set (vX , vY);
 
+    physicBody->SetLinearVelocity (vel);
 }

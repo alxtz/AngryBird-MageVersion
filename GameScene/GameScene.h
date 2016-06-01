@@ -29,6 +29,8 @@ class GameScene : public QGraphicsScene
         void updateWorld();
         void releaseBird();
         void setNewBird();
+        void useSpecialAbility();
+        void spawnBlueChild(int x , int y);
 
     private:
         Singleshot * singleshot;
@@ -38,6 +40,7 @@ class GameScene : public QGraphicsScene
         b2Vec2 * gravity;
 
         AbsBird * focusedBird;
+        AbsBird * flyingBird;
 
         CollisionListener * collisionListener;
 

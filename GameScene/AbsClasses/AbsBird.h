@@ -23,6 +23,7 @@ class AbsBird : public GameItem
     public slots:
         virtual void setPullPos(int x , int y);
         void updatePos ();
+        virtual void specialAbility();
         void releaseBird(int forceX , int forceY);
 };
 
