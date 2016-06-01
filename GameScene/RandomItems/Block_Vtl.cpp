@@ -6,7 +6,7 @@ Block_Vtl::Block_Vtl(b2World *inputWorld, int inputX, int inputY)
     setPixmap(QPixmap("./GameData/DefaultResources/Images/block_vtl.png"));
     inWorld = inputWorld;
     setPos(inputX , inputY);
-    setTransformOriginPoint( 6 , 12);
+    setTransformOriginPoint( 0 , 0);
     objectType = "Block";
 
     //設定block的物體結構

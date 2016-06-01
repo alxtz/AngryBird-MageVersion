@@ -11,6 +11,9 @@ class Stick_Hrz : public GameItem
 
     public:
         Stick_Hrz(b2World * inputWorld , int inputX , int inputY);
+
+    public slots:
+        void updatePos ();
 };
 
 #endif // STICK_HRZ_H

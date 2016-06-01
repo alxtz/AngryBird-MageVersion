@@ -5,7 +5,7 @@ using namespace std;
 
 CollisionListener::CollisionListener()
 {
-
+    //可以等物體都放置好再開啟碰撞監控的功能
 }
 
 void CollisionListener::BeginContact(b2Contact *contact)

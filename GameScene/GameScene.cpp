@@ -1,20 +1,29 @@
+#include <fstream>
+#include <iostream>
 #include <QBrush>
 #include <QImage>
 #include <QDebug>
 #include <QObject>
 #include "./Birds/RedBird.h"
 #include "./RandomItems/Ground.h"
-#include "./RandomItems/Stick.h"
+#include "./RandomItems/Stick_Vtl.h"
 #include "./RandomItems/Stick_Hrz.h"
+#include "./RandomItems/Stick2_Hrz.h"
 #include "./RandomItems/Block_Vtl.h"
+#include "./Pigs/Pig1.h"
 #include "./AbsClasses/GameItem.h"
 #include "GameScene.h"
 
+using namespace std;
+
 GameScene::GameScene()
 {
+    //基本設定
     setBackgroundBrush(QBrush(QImage("./GameData/DefaultResources/Images/background.png")));
-
     setSceneRect ( 0 , 0 , 1200 , 600 );
+
+    //設定哪一關
+    stage = "Stage1";
 
     //設定timer60
     timer60 = new QTimer();
@@ -63,53 +72,89 @@ GameScene::GameScene()
     GameItem * ground = new Ground(physicWorld);
     addItem(ground);
 
-    int pos1 = 600;
+    //int pos1 = 600;
     //新增一個棍子
-    GameItem * stick = new Stick(physicWorld , 600 ,450);
-    addItem(stick);
-    connect(timer60 , SIGNAL(timeout()) , stick , SLOT(updatePos()));
+    //GameItem * stick = new Stick(physicWorld , 600 ,400);
+    //addItem(stick);
+    //connect(timer60 , SIGNAL(timeout()) , stick , SLOT(updatePos()));
 
     //新增一個棍子
-    GameItem * stick1 = new Stick(physicWorld, 645 , 450);
-    addItem(stick1);
-    connect(timer60 , SIGNAL(timeout()) , stick1 , SLOT(updatePos()));
+    //GameItem * stick1 = new Stick(physicWorld, 645 , 400);
+    //addItem(stick1);
+    //connect(timer60 , SIGNAL(timeout()) , stick1 , SLOT(updatePos()));
 
     //新增一個棍子
-    GameItem * stick3 = new Stick_Hrz(physicWorld, 600 , 440);
-    addItem(stick3);
-    connect(timer60 , SIGNAL(timeout()) , stick3 , SLOT(updatePos()));
+    //GameItem * stick3 = new Stick_Hrz(physicWorld, 600 , 390);
+    //addItem(stick3);
+    //connect(timer60 , SIGNAL(timeout()) , stick3 , SLOT(updatePos()));
 
-    int pos2 =  660;
-    //新增一個棍子
-    GameItem * stick4 = new Stick(physicWorld , pos2 ,450);
-    addItem(stick4);
-    connect(timer60 , SIGNAL(timeout()) , stick4 , SLOT(updatePos()));
+    //新增一個Block
+    //GameItem * block1 = new Block_Vtl(physicWorld, 600 , 360);
+    //addItem(block1);
+    //connect(timer60 , SIGNAL(timeout()) , block1 , SLOT(updatePos()));
 
-    //新增一個棍子
-    GameItem * stick5 = new Stick(physicWorld, pos2+45 , 450);
-    addItem(stick5);
-    connect(timer60 , SIGNAL(timeout()) , stick5 , SLOT(updatePos()));
+    setupStage ();
+}
 
-    //新增一個棍子
-    GameItem * stick6 = new Stick_Hrz(physicWorld, pos2 , 440);
-    addItem(stick6);
-    connect(timer60 , SIGNAL(timeout()) , stick6 , SLOT(updatePos()));
+void GameScene::setupStage()
+{
+    ifstream inFile;
+    string stagePath;
+    stagePath = "./GameData/Stages/" + stage + "/setup.txt";
+    inFile.open (stagePath);
 
-    int pos3 =  720;
-    //新增一個棍子
-    GameItem * stick7 = new Stick(physicWorld , pos3 ,450);
-    addItem(stick7);
-    connect(timer60 , SIGNAL(timeout()) , stick7 , SLOT(updatePos()));
+    for(int i=0; i<=999; i++)
+    {
+        int objectType;
+        int x , y;
+        if(inFile>>objectType)
+        {
+            cout<<"第"<<i+1<<"個物體的type為"<<objectType<<endl;
+            inFile>>x;
+            inFile>>y;
 
-    //新增一個棍子
-    GameItem * stick8 = new Stick(physicWorld, pos3+45 , 450);
-    addItem(stick8);
-    connect(timer60 , SIGNAL(timeout()) , stick8 , SLOT(updatePos()));
-
-    //新增一個棍子
-    GameItem * stick9 = new Stick_Hrz(physicWorld, pos3 , 440);
-    addItem(stick9);
-    connect(timer60 , SIGNAL(timeout()) , stick9 , SLOT(updatePos()));
+            switch(objectType)
+            {
+                case 0:
+                {
+                    //0代表產生一個垂直的stick
+                    GameItem * stick_vtl = new Stick_Vtl(physicWorld, x , y);
+                    addItem(stick_vtl);
+                    connect(timer60 , SIGNAL(timeout()) , stick_vtl , SLOT(updatePos()));
+                    break;
+                }
+                case 1:
+                {
+                    //1代表產生一個水平的stick
+                    GameItem * stick_hrz = new Stick_Hrz(physicWorld, x , y);
+                    addItem(stick_hrz);
+                    connect(timer60 , SIGNAL(timeout()) , stick_hrz , SLOT(updatePos()));
+                    break;
+                }
+                case 3:
+                {
+                    //3代表產生一個水平的長stick
+                    GameItem * stick2_hrz = new Stick2_Hrz(physicWorld, x , y);
+                    addItem(stick2_hrz);
+                    connect(timer60 , SIGNAL(timeout()) , stick2_hrz , SLOT(updatePos()));
+                    break;
+                }
+                case 10:
+                {
+                    //10代表產生一隻pig1
+                    GameItem * pig1 = new Pig1(physicWorld, x , y);
+                    addItem(pig1);
+                    connect(timer60 , SIGNAL(timeout()) , pig1 , SLOT(updatePos()));
+                    break;
+                }
+            }
+        }
+        else
+        {
+            cout<<"讀檔結束"<<endl;
+            return;
+        }
+    }
 
 }
 

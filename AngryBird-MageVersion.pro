@@ -22,10 +22,12 @@ SOURCES += main.cpp\
     GameScene/AbsClasses/AbsBird.cpp \
     GameScene/Birds/RedBird.cpp \
     GameScene/RandomItems/Ground.cpp \
-    GameScene/RandomItems/Stick.cpp \
     GameScene/CollisionListener.cpp \
     GameScene/RandomItems/Stick_Hrz.cpp \
-    GameScene/RandomItems/Block_Vtl.cpp
+    GameScene/RandomItems/Block_Vtl.cpp \
+    GameScene/RandomItems/Stick_Vtl.cpp \
+    GameScene/RandomItems/Stick2_Hrz.cpp \
+    GameScene/Pigs/Pig1.cpp
 
 HEADERS  += MainWindow.h \
     GameView.h \
@@ -36,10 +38,12 @@ HEADERS  += MainWindow.h \
     GameScene/AbsClasses/AbsBird.h \
     GameScene/Birds/RedBird.h \
     GameScene/RandomItems/Ground.h \
-    GameScene/RandomItems/Stick.h \
     GameScene/CollisionListener.h \
     GameScene/RandomItems/Stick_Hrz.h \
-    GameScene/RandomItems/Block_Vtl.h
+    GameScene/RandomItems/Block_Vtl.h \
+    GameScene/RandomItems/Stick_Vtl.h \
+    GameScene/RandomItems/Stick2_Hrz.h \
+    GameScene/Pigs/Pig1.h
 
 INCLUDEPATH += /usr/local/lib
 LIBS += -L /usr/local/lib/

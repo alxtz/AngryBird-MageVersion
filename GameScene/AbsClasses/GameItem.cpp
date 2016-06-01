@@ -14,7 +14,7 @@ void GameItem::updatePos()
 
     float angle;
     angle = physicBody->GetAngle();
-    setRotation(RadToDeg(angle));
+    setRotation(-RadToDeg(angle));
 }
 
 float GameItem::PixToMeter_x(float Pix)

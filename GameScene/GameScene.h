@@ -6,10 +6,13 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 #include <QTimer>
+#include <cstring>
 #include "./AbsClasses/AbsBird.h"
 #include "Singleshot.h"
 #include "GameEngine.h"
 #include "CollisionListener.h"
+
+using namespace std;
 
 class GameScene : public QGraphicsScene
 {
@@ -17,6 +20,8 @@ class GameScene : public QGraphicsScene
 
     public:
         GameScene();
+
+        void setupStage();
 
     public slots:
         void updateWorld();
@@ -34,6 +39,8 @@ class GameScene : public QGraphicsScene
         AbsBird * focusedBird;
 
         CollisionListener * collisionListener;
+
+        string stage;
 
         //設定一個vector，貯存在physicWorld裡面的所有物體
 };

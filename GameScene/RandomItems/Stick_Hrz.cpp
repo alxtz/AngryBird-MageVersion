@@ -1,4 +1,7 @@
+#include <iostream>
 #include "Stick_Hrz.h"
+
+using namespace std;
 
 Stick_Hrz::Stick_Hrz(b2World *inputWorld, int inputX, int inputY)
 {
@@ -35,4 +38,15 @@ Stick_Hrz::Stick_Hrz(b2World *inputWorld, int inputX, int inputY)
     physicBody = inWorld->CreateBody(bodyStruct);
     physicBody->SetUserData (&objectType);
     physicBody->CreateFixture(bodyFixture);
+}
+
+void Stick_Hrz::updatePos()
+{
+    b2Vec2 pos;
+    pos = physicBody->GetPosition();
+    setPos(MeterToPix_x(pos.x) , MeterToPix_y(pos.y));
+
+    float angle;
+    angle = physicBody->GetAngle();
+    setRotation(-RadToDeg(angle));
 }
