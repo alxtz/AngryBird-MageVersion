@@ -4,6 +4,7 @@ GameItem::GameItem()
 {
     bodyStruct = new b2BodyDef();
     bodyFixture = new b2FixtureDef();
+    itemData = new ItemData();
 }
 
 void GameItem::updatePos()

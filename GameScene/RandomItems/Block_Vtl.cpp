@@ -27,7 +27,7 @@ Block_Vtl::Block_Vtl(b2World *inputWorld, int inputX, int inputY)
         polygonShape->Set (vertices , 4);
 
     bodyFixture->shape = polygonShape;
-    bodyFixture->density = 0.5;
+    bodyFixture->density = 5;
     bodyFixture->friction = 1.0f;
     bodyFixture->restitution = 0.3f;
 

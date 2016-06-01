@@ -10,7 +10,11 @@ Stick_Hrz::Stick_Hrz(b2World *inputWorld, int inputX, int inputY)
     inWorld = inputWorld;
     setPos(inputX , inputY);
     setTransformOriginPoint( 0 , 0);
-    objectType = "Stick";
+
+    //設定stick的itemData
+    itemData->objectType =  "Stick";
+    itemData->sceneObject = this;
+    itemData->bodyObject = physicBody;
 
     //設定stick的物體結構
     bodyStruct->type = b2_dynamicBody;
@@ -30,13 +34,13 @@ Stick_Hrz::Stick_Hrz(b2World *inputWorld, int inputX, int inputY)
         polygonShape->Set (vertices , 4);
 
     bodyFixture->shape = polygonShape;
-    bodyFixture->density = 0.5;
+    bodyFixture->density = 5;
     bodyFixture->friction = 1.0f;
     bodyFixture->restitution = 0.3f;
 
     //丟進世界裡
     physicBody = inWorld->CreateBody(bodyStruct);
-    physicBody->SetUserData (&objectType);
+    physicBody->SetUserData (itemData);
     physicBody->CreateFixture(bodyFixture);
 }
 

@@ -1,16 +1,20 @@
+#include <QGraphicsScene>
 #include "RedBird.h"
+#include "../GameScene.h"
 
 RedBird::RedBird(b2World * inputWorld)
-{
+{   
     //基本設定
     setPos(100 , 400);
     inWorld = inputWorld;
     setPixmap(QPixmap("./GameData/DefaultResources/Images/BirdImages/redBird.png"));
     setTransformOriginPoint(0 , 0);
-    //ObjectType = new string("Bird");
-    objectType = "Bird";
+    health = 3;
 
-    //設定鳥的physicBody
+    //設定鳥的ItemData
+    itemData->objectType =  "Bird";
+    itemData->sceneObject = this;
+    itemData->bodyObject = physicBody;
 
     //設定鳥的物體結構
     bodyStruct->type = b2_dynamicBody;
@@ -28,8 +32,27 @@ RedBird::RedBird(b2World * inputWorld)
     bodyFixture->density = 1;
     bodyFixture->friction = 1.0f ;
     bodyFixture->restitution = 0.75f;
+}
 
-    //把物體跟定製器加進inWorld裡做運算
-    //physicBody = inWorld->CreateBody(bodyStruct);
-    //physicBody->SetUserData ( ObjectType );
+void RedBird::updatePos()
+{
+    b2Vec2 pos;
+    pos = physicBody->GetPosition();
+    setPos(MeterToPix_x(pos.x) , MeterToPix_y(pos.y));
+
+    float angle;
+    angle = physicBody->GetAngle();
+    setRotation(-RadToDeg(angle));
+
+    if(health<3)
+    {
+        setPixmap(QPixmap("./GameData/DefaultResources/Images/BirdImages/redBirdHurt.png"));
+    }
+    if(health<=0)
+    {
+        inWorld->DestroyBody (physicBody);
+        scene ()->removeItem (this);
+        delete this;
+        return;
+    }
 }

@@ -28,6 +28,7 @@ class GameEngine : public QObject , public QGraphicsPixmapItem
 
     private:
         bool leftButtonPressed;
+
 };
 
 #endif // GAMEENGINE_H

@@ -25,6 +25,9 @@ class Singleshot : public QObject , public QGraphicsPixmapItem
         void release();
         void shorten();
 
+    signals:
+        void setNewBird();
+
     private:
         QGraphicsPixmapItem * singleshotPic;
 
@@ -40,6 +43,7 @@ class Singleshot : public QObject , public QGraphicsPixmapItem
         QTimer * shortenTimer;
 
         bool isShortening;
+        bool hasBird;
 };
 
 

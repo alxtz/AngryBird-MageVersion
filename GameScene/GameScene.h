@@ -23,9 +23,12 @@ class GameScene : public QGraphicsScene
 
         void setupStage();
 
+        QTimer * timer60;
+
     public slots:
         void updateWorld();
         void releaseBird();
+        void setNewBird();
 
     private:
         Singleshot * singleshot;
@@ -33,8 +36,6 @@ class GameScene : public QGraphicsScene
 
         b2World * physicWorld;
         b2Vec2 * gravity;
-
-        QTimer * timer60;
 
         AbsBird * focusedBird;
 

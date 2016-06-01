@@ -18,8 +18,10 @@ class AbsBird : public GameItem
     public:
         AbsBird();
 
+        int health;
+
     public slots:
-        void setPullPos(int x , int y);
+        virtual void setPullPos(int x , int y);
         void updatePos ();
         void releaseBird(int forceX , int forceY);
 };

@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QObject>
 #include "./Birds/RedBird.h"
+#include "./Birds/YellowBird.h"
+#include "./Birds/BigBird.h"
 #include "./RandomItems/Ground.h"
 #include "./RandomItems/Stick_Vtl.h"
 #include "./RandomItems/Stick_Hrz.h"
@@ -38,6 +40,8 @@ GameScene::GameScene()
     singleshot = new Singleshot();
     addItem(singleshot);
 
+    connect (singleshot , SIGNAL(setNewBird()) , this , SLOT(setNewBird()));
+
     //設定gameEngine
     gameEngine = new GameEngine();
     addItem(gameEngine);
@@ -66,7 +70,6 @@ GameScene::GameScene()
     focusedBird = redBird;
     addItem(redBird);
     connect(gameEngine , SIGNAL(getPullPos(int , int)) , redBird , SLOT(setPullPos(int , int)) );
-    //connect(timer60 , SIGNAL(timeout()) , redBird , SLOT(updatePos()));
 
 
     //新增一個地板
@@ -176,4 +179,25 @@ void GameScene::releaseBird()
 {
     connect(timer60 , SIGNAL(timeout()) , focusedBird , SLOT(updatePos()));
     focusedBird->releaseBird(singleshot->forceX , singleshot->forceY);
+}
+
+void GameScene::setNewBird()
+{
+    disconnect(gameEngine , SIGNAL(getPullPos(int , int)) , focusedBird , SLOT(setPullPos(int , int)) );
+    /*
+    AbsBird * redBird = new RedBird(physicWorld);
+    focusedBird = redBird;
+    addItem(redBird);
+    connect(gameEngine , SIGNAL(getPullPos(int , int)) , redBird , SLOT(setPullPos(int , int)) );
+    */
+    /*
+    AbsBird * yellowBird = new YellowBird(physicWorld);
+    focusedBird = yellowBird;
+    addItem(yellowBird);
+    connect(gameEngine , SIGNAL(getPullPos(int , int)) , yellowBird , SLOT(setPullPos(int , int)) );
+    */
+    AbsBird * bigBird = new BigBird(physicWorld);
+    focusedBird = bigBird;
+    addItem(bigBird);
+    connect(gameEngine , SIGNAL(getPullPos(int , int)) , bigBird , SLOT(setPullPos(int , int)) );
 }

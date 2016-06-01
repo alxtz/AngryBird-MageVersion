@@ -28,7 +28,10 @@ SOURCES += main.cpp\
     GameScene/RandomItems/Stick_Vtl.cpp \
     GameScene/RandomItems/Stick2_Hrz.cpp \
     GameScene/Pigs/Pig1.cpp \
-    GameScene/RandomItems/Stick2_Vtl.cpp
+    GameScene/RandomItems/Stick2_Vtl.cpp \
+    GameScene/AbsClasses/ItemData.cpp \
+    GameScene/Birds/YellowBird.cpp \
+    GameScene/Birds/BigBird.cpp
 
 HEADERS  += MainWindow.h \
     GameView.h \
@@ -45,7 +48,10 @@ HEADERS  += MainWindow.h \
     GameScene/RandomItems/Stick_Vtl.h \
     GameScene/RandomItems/Stick2_Hrz.h \
     GameScene/Pigs/Pig1.h \
-    GameScene/RandomItems/Stick2_Vtl.h
+    GameScene/RandomItems/Stick2_Vtl.h \
+    GameScene/AbsClasses/ItemData.h \
+    GameScene/Birds/YellowBird.h \
+    GameScene/Birds/BigBird.h
 
 INCLUDEPATH += /usr/local/lib
 LIBS += -L /usr/local/lib/

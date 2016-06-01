@@ -11,6 +11,8 @@ using namespace std;
 
 Singleshot::Singleshot()
 {
+    hasBird = true;
+
     isShortening = false;
 
     shortenTimer = new QTimer();
@@ -133,6 +135,7 @@ void Singleshot::pull(int x, int y)
 
 void Singleshot::release()
 {
+    hasBird = false;
     isShortening = true;
 
     cout<<"called release"<<endl;
@@ -156,8 +159,13 @@ void Singleshot::shorten()
 
     if(RB2length<10&&RB2length<10)
     {
-        cout<<"stops"<<endl;
         shortenTimer->stop();
+        cout<<"stops"<<endl;
         isShortening = false;
+        if(hasBird==false)
+        {
+            emit setNewBird ();
+            hasBird = true;
+        }
     }
 }

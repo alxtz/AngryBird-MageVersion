@@ -33,7 +33,7 @@ void AbsBird::releaseBird(int forceX , int forceY)
 
     //把物體跟定製器加進inWorld裡做運算
     physicBody = inWorld->CreateBody(bodyStruct);
-    physicBody->SetUserData (&objectType);
+    physicBody->SetUserData (itemData);
     physicBody->CreateFixture(bodyFixture);
 
     //設定鳥受重力的幅度
@@ -46,7 +46,7 @@ void AbsBird::releaseBird(int forceX , int forceY)
     physicBody->SetAngularDamping(0.3);
     physicBody->SetLinearDamping(0.07);
 
-    string * objectName = (string*)physicBody->GetUserData ();
+    //string * objectName = (string*)physicBody->GetUserData ();
 
-    cout<<"物體的名字為"<<*objectName<<endl;
+    //cout<<"物體的名字為"<<*objectName<<endl;
 }

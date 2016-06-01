@@ -10,7 +10,6 @@ class GameView : public QGraphicsView
     public:
         GameView(QWidget * parent = 0);
 
-    private:
         GameScene * gameScene;
 };
 

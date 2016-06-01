@@ -2,10 +2,11 @@
 #define GAMEITEM_H
 
 
-#include <cstring>
+#include <string>
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include <Box2D/Box2D.h>
+#include "ItemData.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class GameItem : public QObject , public QGraphicsPixmapItem
         GameItem();
 
         string objectType;
+        ItemData * itemData;
 
     public slots:
         virtual void updatePos();

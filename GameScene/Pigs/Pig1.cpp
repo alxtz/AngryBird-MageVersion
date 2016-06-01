@@ -7,7 +7,11 @@ Pig1::Pig1(b2World *inputWorld, int inputX, int inputY)
     inWorld = inputWorld;
     setPos(inputX , inputY);
     setTransformOriginPoint( 0 , 0 );
-    objectType = "Pig";
+
+    //設定stick的itemData
+    itemData->objectType =  "Pig";
+    itemData->sceneObject = this;
+    itemData->bodyObject = physicBody;
 
     //設定pig1的物體結構
     bodyStruct->type = b2_dynamicBody;
@@ -28,7 +32,7 @@ Pig1::Pig1(b2World *inputWorld, int inputX, int inputY)
 
     //丟進世界裡
     physicBody = inWorld->CreateBody(bodyStruct);
-    physicBody->SetUserData (&objectType);
+    physicBody->SetUserData (itemData);
     physicBody->CreateFixture(bodyFixture);
 
     //設定角速度遞減跟線速度遞減
